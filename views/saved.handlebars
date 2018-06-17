@@ -1,0 +1,109 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Web Scraper News</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="active"><a href="/saved">Saved Articles</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <div class="overlay">
+  </div>
+  <div class="background-image">
+  </div>
+  <div class="caption">
+    <h1>Web Scraper News</h1>
+    <p>NY Times Edition</p>
+  </div>
+</div>
+
+<div class="container-fluid article-container">
+
+  {{#if articles}}
+    {{#each articles}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          <a class="article-link" target="_blank" href="{{this.url}}">{{this.headline}}</a>
+          {{#if this.isSaved}}
+            <button type="button" class="btn btn-success myBtn" data-id={{this._id}} id="myBtn">Add a Note</button> 
+            {{#unless notes}}
+              <a class="btn btn-danger delete" data-id={{this._id}}>Delete from Saved</a>
+            {{/unless}}
+          {{else}}
+            <a class="btn btn-success save" data-id={{this._id}}>Save Article</a>
+          {{/if}}
+        </h4>
+      </div>
+      <div class="panel-body">
+        "{{this.summary}}"
+      </div>
+      {{#if notes}}
+      <div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Notes</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each notes}}
+      <tr>
+        <td>{{this.comment}}</td>
+        <td style="text-align: right;"><a class="btn btn-danger delete-note" data-id={{this._id}}>Delete This Note</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+      {{/if}}
+    </div> 
+    {{/each}}
+  {{else}}
+    <div class='alert alert-warning text-center'>
+      <h4>There are no saved articles.  Go back to home and save at least one article"</h4>
+    </div> 
+  {{/if}}
+</div>
+
+  <!-- Modal -->
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:red;">Add a Note</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <input type="hidden" id="articleId" name="articleId" value="dummy" />
+            <div class="form-group">
+              <label for="comment">Note:</label>
+              <input type="text" class="form-control" name="comment" id="comment" placeholder="Enter note">
+            </div>
+            <button type="button" class="btn btn-default btn-success btn-block" id="submitNote">Submit your Note</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>Web Scraper News - NY Times Edition</p>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../../assets/js/saved.js"></script>
