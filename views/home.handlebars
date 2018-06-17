@@ -1,0 +1,61 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Web Scraper News</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="/saved">Saved Articles</a></li>
+      <li><a class="btn btn-danger scrape-new">SCRAPE NY TIMES ARTICLES!</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <div class="overlay">
+  </div>
+  <div class="background-image">
+  </div>
+  <div class="caption">
+    <h1>Web Scraper News</h1>
+    <p>NY Times Edition</p>
+  </div>
+</div>
+
+<div class="container-fluid article-container">
+
+  {{#if articles}}
+    {{#each articles}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          <a class="article-link" target="_blank" href="{{this.url}}">{{this.headline}}</a>
+          {{#if this.isSaved}}
+            <a class="btn btn-info notes" data-id={{this._id}}>Article Notes</a>        
+            <a class="btn btn-danger delete" data-id={{this._id}}>Delete from Saved</a>
+          {{else}}
+            <a class="btn btn-success save" data-id={{this._id}}>Save Article</a>
+          {{/if}}
+        </h4>
+      </div>
+      <div class="panel-body">
+        "{{this.summary}}"
+      </div>
+    </div> 
+    {{/each}}
+  {{else}}
+    <div class='alert alert-warning text-center'>
+      <h4>There are no unsaved articles.  Please press scrape"</h4>
+    </div> 
+  {{/if}}
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>Web Scraper News - NY Times Edition</p>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../../assets/js/home.js"></script>
