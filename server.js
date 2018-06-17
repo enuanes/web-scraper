@@ -23,16 +23,9 @@ app.use(express.static("public"));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// Connect to the Mongo DB
-// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database    
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/cobranewsdb";
-
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-    // useMongoClient: true
-});
-
-
+mongoose.connect('mongodb://localhost/web-scraper-news');
+    
 // Routes
 
 app.get("/", function(req, res) {
